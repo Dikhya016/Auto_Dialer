@@ -1,0 +1,82 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="main_container">
+    <h2 class="heading">Phonebooks</h2>
+    <button class="btn btn-success"><a class="text-white" href="../phonebooks/create/"> Create Phonebook</a> <i class='fas fa-address-book'></i></button>
+    <!-- <button class="btn btn-light"><a class="text-dark" href="/contacts/create/">Create Contact <i class="fa fa-address-card"></i> </a></button> -->
+    <button class="btn btn-warning"><a class="text-dark" href="/contacts/">All Contacts <i class="fa fa-address-card"></i> </a></button>
+    <button class="btn btn-secondary" data-toggle="modal" data-target="#dial-phonebook-modal">
+        Do call <i class="fa fa-phone"></i>
+    </button>
+    <button class="btn btn-white">
+        <a href="/call-records/" class="text-dark"> View call records <i class="fa fa-archive"></i> </a>
+    </button>
+    
+    
+
+  <div class="modal fade" id="dial-phonebook-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Dial a phonebook</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="/dial-phonebook/">
+            {% csrf_token %}
+            <label>Select phonebook</label>
+            <select name="phid">
+                {% for p in phonebooks %}
+                    <option value="{{p.id}}"> {{p.name}} </option>
+                {% endfor %}
+            </select>
+            <br>
+            <label for="message"> Enter a message : </label>
+            <br>
+            <textarea name="txt-msg" id="message" placeholder="Type here...">
+
+            </textarea>
+            <br>
+            <button type="submit" class="btn btn-primary"> Call</a></button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+    
+    <div class="table-responsive-md">
+        <table class="table" border="3">
+            <tr class="thead-dark">
+                <th scope="col">Name of Phonebook  <i class="fa fa-address-book"></i></th> 
+                <th scope="col">View Contacts  <i class="fa fa-address-card"></i></th>
+                <th scope="col">Actions  <i class="fas fa-tasks"></i></th>
+            </tr>
+            {% for phonebook in phonebooks %}
+            <tr>
+                <td class="ph_name">{{ phonebook.name }}</td>
+                <td><button class="btn btn-light"><a class="text-dark" href="/phonebook-specific/{{phonebook.id}}">Open <i class="fa fa-external-link"></i></a></button></td>
+                <td ><button  type="button" class="btn btn-warning btn-sm"> <a class="text-dark" href="{% url 'phonebook_edit' pk=phonebook.pk %}">Edit <i class='far fa-edit'></i></a></button> 
+                    <button type="button" class="btn btn-danger btn-sm" data-id="{{phonebook.id}}"> <a href="{% url 'phonebook_delete' pk=phonebook.pk %}">Delete <i class="fa fa-trash-o"></i></a></button>
+                    <button class="btn btn-secondary btn-sm"> <a class="text-white" href="./{{phonebook.id}}">Detail</a></button>
+                </td>
+            </tr>
+            {%empty%}
+              <h4 style="color: red;">This Phonebook is empty. please create using above button.</h4>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+
+
+{% endblock %}
+

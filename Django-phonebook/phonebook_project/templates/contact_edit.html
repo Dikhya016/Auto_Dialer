@@ -1,0 +1,20 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<button onclick="history.back()" class="btn btn-dark back_btn"> Back <i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+
+<div class="contact_edit">
+    <h1 class="detail_heading">Edit Contact <i class='far fa-edit'></i></h1>
+    <div class="sub_contact_det">
+        <form method="post" >
+            {% csrf_token %}
+            {{ form.as_p }}
+            
+            <input class="btn btn-primary" type="submit" value="Save">
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+

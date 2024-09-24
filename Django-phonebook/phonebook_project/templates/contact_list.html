@@ -1,0 +1,64 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<button class="btn btn-dark back_btn"><a href="/phonebooks/">Back to Home <i class="fa fa-arrow-left" aria-hidden="true"></i></a></button>
+
+<h1 class="sub_head">Contacts</h1>
+<div class="contact_create">
+    <button class="btn btn-success create_cont"><a class="text-white" href="/contacts/create/">Create Contact <i class="fa fa-address-card"></i> </a></button>
+    <form method="GET" >
+        <select name="phid" class="all">
+            <option  value="all"> ALL </option>
+            {% for p in phonebooks %}
+                <option value="{{p.id}}"> {{p.name}} </option>
+            {% endfor %}
+        </select>
+        <input class="btn btn-success" type="submit">
+    </form>
+</div>
+
+<main class="list_cont">
+    <div class="table-responsive-md responsive">
+        <table class="table"  border="2">
+            <tr class="first_head">
+                <th> SNo. </th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Phone No.</th>
+                <th>Phonebooks</th>
+            </tr>
+            {% for contact in contacts %}
+            <tr>
+                <td class="fullname">
+                    {{forloop.counter}}
+                </td>
+                <td class="fullname">
+                    {{ contact.first_name }} {{ contact.last_name }}
+                </td>
+                <td  class="content">
+                    {{ contact.city }}
+                </td>
+                <td class="content"> {{ contact.phone_number }}</td>
+                <td class="content">
+                    <ul>
+                        {% for phonebook in contact.phonebooks.all %}
+                            <li>{{ phonebook.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <!-- <td>
+                    <button> <a href="./{{contact.id}}"> Open </a> </button>
+                </td> -->
+            </tr>
+            {%empty%}
+                <h4 style="color: red;">Your contact list is empty.Please create using above button.</h4>
+            {% endfor %}
+        </table>
+        <br><br><br>
+        
+    </div>  
+</main>
+
+{% endblock %}
+

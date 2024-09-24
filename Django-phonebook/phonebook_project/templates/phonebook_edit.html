@@ -1,0 +1,15 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<button onclick="history.back()" class="btn btn-dark back_btn"> Back <i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+
+<form method="post" class="cont_edit">
+    {% csrf_token %}
+    <h1>Edit Phonebook <i class='far fa-edit'></i></h1>
+    <label class="inp_lev" for="id_name">Name:</label>
+    <input class="nam_inp" type="text" name="name" id="id_name" value="{{ form.instance.name }}" required>
+    <input class="btn btn-primary" type="submit" value="Save">
+</form>
+{% endblock %}
+

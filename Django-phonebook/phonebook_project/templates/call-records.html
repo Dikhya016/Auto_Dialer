@@ -1,0 +1,59 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<button class="btn btn-dark back_btn"><a href="/phonebooks/">Back to Home <i class="fa fa-arrow-left" aria-hidden="true"></i></a></button>
+
+<h1 class="sub_head">Call records</h1>
+
+<main class="list_cont">
+    <div class="table-responsive-md responsive">
+        <table class="table"  border="2">
+            <tr class="first_head">
+                <th> SNo. </th>
+                <th> Name </th>
+                <th> Phone number </th>
+                <th> Call Timestamp </th>
+                <th> Call Duration </th>
+                <th> Call cost </th>
+                <th> Call Result </th>
+            </tr>
+            {% for call in records %}
+            <tr>
+                <td class="fullname">
+                    {{forloop.counter}}
+                </td>
+                <td class="fullname">
+                    {{ call.username }}
+                </td>
+                <td  class="content">
+                    {{ call.phonenum }}
+                </td>
+                <td  class="content">
+                    {{ call.call_timestamp }}
+                </td>
+                <td  class="content">
+                    {{ call.duration }}
+                </td>
+                <td  class="content">
+                    {{ call.call_cost }}
+                </td>
+                <td class="content">
+                    {{ call.call_result }}
+                </td>
+                
+                <!-- <td>
+                    <button> <a href="./{{contact.id}}"> Open </a> </button>
+                </td> -->
+            </tr>
+            {%empty%}
+                <h3 style="color: red;">Call History is empty.</h3>
+            {% endfor %}
+        </table>
+        <br><br><br>
+        
+    </div>  
+</main>
+
+{% endblock %}
+

@@ -1,0 +1,53 @@
+
+{% extends 'base.html' %} {% block content %}
+<!-- <button class="btn btn-dark back_btn"><a href="/phonebooks/">Back <i class="fa fa-arrow-left" aria-hidden="true"></i></a></button> -->
+<button onclick="history.back()" class="btn btn-dark back_btn"> Back <i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+
+<script type="text/javascript">
+  function validateForm()
+  {
+    var fn=document.getElementById("id_first_name").value
+    var ln=document.getElementById("id_last_name").value
+
+    var all_alpha_reg='^[A-Za-z]+$'
+
+    if( ! fn.match(all_alpha_reg))
+    {
+        alert('Check the first name entered !')
+        return false;
+    }
+
+    if( ! ln.match(all_alpha_reg))
+    {
+        alert('Check the last name entered !')
+        return false;
+    }
+    //document.write('js code')
+    var city=document.getElementById("id_city").value;
+    var phnum=document.getElementById("id_phone_number").value;
+
+    if(city.length < 3)
+    {
+      alert("City or city details must be atleast 3 characters.")
+      return false;
+    } 
+    if(! phnum.startsWith('+'))
+    {
+      alert("Please check the phone number entered. Country code is mandatory.")
+      return false;
+    }
+    return true;
+  }
+</script>
+
+<div class="contact_edit">
+  <h1 class="detail_heading">Create Contact</h1>
+  <form method="post" onsubmit="return validateForm();" class="sub_contact_det">
+    {% csrf_token %} {{ form.as_p }}
+     
+    <input class="btn btn-primary" type="reset" value="Reset" />
+    <input class="btn btn-success" type="submit" value="Create" />
+  </form>
+</div>
+
+{% endblock %}

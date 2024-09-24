@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<button onclick="history.back()" class="btn btn-dark back_btn"> Back <i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+
+<div class="contact_det">
+    <h1 class="detail_heading">Contact Detail <img width="40" height="40" src="https://img.icons8.com/ios-glyphs/30/view-details.png" alt="view-details"/></h1>
+    <div class="sub_contact_det">
+        <p>First Name : {{ contact.first_name }}</p>
+        <p>Last Name : {{ contact.last_name }}</p>
+        <p>City : {{ contact.city }}</p>
+        <p>Phone Number : {{ contact.phone_number }}</p>
+        <p>Phonebooks : </p>
+        <ul>
+            {% for phonebook in contact.phonebooks.all %}
+                <li>{{ phonebook.name }}</li>
+            {% endfor %}
+        </ul>
+        <p><a class="btn btn-primary" href="{% url 'contact_edit' pk=contact.pk %}">Edit</a>
+            <a class="btn btn-danger "  href="{% url 'contact_delete' pk=contact.pk %}">Delete</a></p>
+    </div>
+</div>
+
+{% endblock %}
+

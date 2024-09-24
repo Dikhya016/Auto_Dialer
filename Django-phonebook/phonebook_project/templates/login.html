@@ -1,0 +1,25 @@
+
+{% extends 'base2.html' %} 
+
+{% block content %}
+
+<form method="post" class="login_form">
+    <h2 class="login_head">Log In</h2>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="btn_left">
+        <button class="btn btn-primary" type="submit">Log In</button> <button class="btn btn-primary"><a href="/">Sign Up</a></button>
+    </div>
+    
+</form>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Add your custom CSS for labels here */
+    label {
+        /* Your CSS styles */
+        font-size: 100px;
+    }
+</style>
+{% endblock %}

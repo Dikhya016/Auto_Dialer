@@ -1,0 +1,15 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<button onclick="history.back()" class="btn btn-dark back_btn"> Back <i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+
+<div class="detail_cont">
+    <h1>Phonebook Detail<img width="40" height="40" src="https://img.icons8.com/ios-glyphs/30/view-details.png" alt="view-details"/></h1>
+    <p class="inp_lev">Name: {{ phonebook.name }}</p>
+    <p><a class="btn btn-primary" href="{% url 'phonebook_edit' pk=phonebook.pk %}">Edit</a>
+        <a class="btn btn-danger " href="{% url 'phonebook_delete' pk=phonebook.pk %}">Delete</a></p>
+</div>
+
+{% endblock %}
+

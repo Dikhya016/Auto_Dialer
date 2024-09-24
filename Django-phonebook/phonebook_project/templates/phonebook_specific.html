@@ -1,0 +1,45 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<button onclick="history.back()" class="btn btn-dark back_btn"> Back <i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+
+
+<!-- <h1 class="heading">Phonebooks and Contacts</h1> -->
+<main class="contact_cont">
+  <button class="btn btn-light"><a class="text-dark" href="/contacts/create/">Create Contact <i class="fa fa-address-card"></i> </a></button>
+  {% for phonebook in phonebooks %}
+    
+    <h2 class="sub_head">{{ phonebook.name }}</h2>
+    <div class="table-responsive-md">
+      <table class="table" border="3">
+        <tr class="thead-dark">
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">City</th>
+          <th scope="col">Phone No.</th>
+          <th scope="col">Actions</th>
+        </tr>
+        {% for contact in phonebook.contacts.all %}
+        <tr>
+          <td class="ph_name">{{ contact.first_name }}</td>
+          <td class="ph_name">{{ contact.last_name }} </td>
+          <td class="ph_name">{{ contact.city }}</td>
+          <td class="ph_name">{{ contact.phone_number }}</td>
+          <td ><button  type="button" class="btn btn-white btn-sm"> <a class="text-dark" href="{% url 'contact_edit' pk=contact.pk %}">Edit <i class='far fa-edit'></i></a></button> 
+            <button type="button" class="btn btn-danger btn-sm"><a class="text-white" href="{% url 'contact_delete' pk=contact.pk %}">Delete <i class="fa fa-trash-o"></i></a></button>
+            <button class="btn btn-secondary btn-sm"> <a class="text-white" href="/contacts/{{contact.pk}}">Detail</a></button>
+        </td>
+        </tr>
+        {%empty%}
+          <h3 style="color: red;">Your contact list is empty.Please create using above button.</h3>
+        {% endfor %}
+      </table>
+    </div>
+    
+  {% endfor %}
+</main>
+
+
+{% endblock %}
+
