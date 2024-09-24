@@ -48,10 +48,10 @@ def make_call(account_sid, auth_token,name, from_, to, twiml,uid):
 
 def dial_all(uid,msg,phs):
 
-    account_sid = 'AC633f6976e18fe789fe4ee1d52dc62f88'
-    auth_token = '5778ce9f0e4acbb032406ad8144c9e48'
-    from_number = '+19705288390'
-    #to_numbers = ['+918143575574', '+917008299284','+916372484602']  # Add multiple numbers here
+    account_sid = 'add your twilio sid'
+    auth_token = 'add your auth_token'
+    from_number = 'add your twilio no.'
+   
     twiml = '<Response><Say voice="woman">'+msg+'</Say></Response>'
 
     threads = []
